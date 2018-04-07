@@ -17,6 +17,7 @@ SEPARATOR="_"
 GPS_LATITUDE=""
 GPS_LONGITUDE=""
 regex="[0-9]{6}" # Regular expresion to match time in format HHMMSS
+cero=0
 
 function printusage {
     echo "whatssfix 1.0"
@@ -76,14 +77,14 @@ function updateexif {
                 TIME=00:00:00
             fi
 
-            if [[ $GPS_LATITUDE > 0 ]]
+            if [[ $(echo "$GPS_LATITUDE > $cero" | bc) -eq 1 ]]
             then
                 GPSLatitudeRef=N
             else
                 GPSLatitudeRef=S
             fi
 
-            if [[ $GPS_LONGITUDE > 0 ]]
+            if [[ $(echo "$GPS_LONGITUDE > $cero" | bc) -eq 1 ]]
             then
                 GPSLongitudeRef=E
             else
